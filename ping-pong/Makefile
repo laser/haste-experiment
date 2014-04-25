@@ -1,17 +1,17 @@
-all: chatbox chatbox.js
+all: ping-pong ping-pong.js
 
-chatbox.js: chatbox.hs
-	hastec chatbox.hs
+ping-pong.js: ping-pong.hs
+	hastec ping-pong.hs
 
-chatbox:
-	ghc --make chatbox.hs
+ping-pong:
+	ghc --make ping-pong.hs
 
 clean:
 	-rm -r main
 	-rm *~
-	-rm chatbox.hi
-	-rm chatbox.o
+	-rm ping-pong.hi
+	-rm ping-pong.o
 
 distclean: clean
-	-rm chatbox
-	-rm chatbox.js
+	-rm ping-pong
+	-rm ping-pong.js
