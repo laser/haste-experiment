@@ -3,7 +3,7 @@ all: ping-pong ping-pong.js
 ping-pong.js: ping-pong.hs
 	hastec ping-pong.hs
 
-ping-pong:
+ping-pong: ping-pong.hs
 	ghc --make ping-pong.hs
 
 clean:
