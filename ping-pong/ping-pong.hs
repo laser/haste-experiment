@@ -9,7 +9,9 @@ import Data.List (lookup)
 import Data.IORef
 import qualified Data.Set as S
 
-respond newmsg = liftIO $ newmsg
+respond :: MonadIO m => String -> m String
+respond msg = liftIO $ do
+  return ("pong: " ++ msg)
 
 main :: IO ()
 main = do
@@ -18,7 +20,7 @@ main = do
 
     runClient $ withElems ["submit", "output"] $ \[button, textarea] -> do
       onEvent button OnClick $ \_ _ -> do
-        newmsg   <- prompt "Enter a message"
-        response <- onServer $ respond <.> newmsg
+        msg      <- prompt "ping: "
+        response <- onServer $ respond <.> msg
         curr     <- getProp textarea "innerHTML"
         setProp textarea "innerHTML" $ curr ++ toString response ++ "\n"
