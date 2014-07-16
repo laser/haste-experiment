@@ -39,7 +39,7 @@ onSaveClicked :: Elem -> Int -> (Int, Int) -> IO ()
 onSaveClicked outputEl _ _ = getText outputEl >>= setItem "message"
 
 setText :: Elem -> String -> IO ()
-setText el s = setProp el "innerHTML" s
+setText el s = setProp el "value" s
 
 getText :: Elem -> IO (String)
-getText el = getProp el "innerHTML"
+getText el = getProp el "value"
