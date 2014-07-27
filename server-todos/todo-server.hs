@@ -19,7 +19,7 @@ addTodo :: MonadIO m => m (C.MVar [Todo]) -> Todo -> m [Todo]
 addTodo container todo = do
   current <- container
   liftIO $ do
-    todos <- C.readMVar current
+    todos <- C.takeMVar current
     C.putMVar current $ todo : todos
     C.readMVar current
 
@@ -39,5 +39,5 @@ main = do
       (saveButton ui) `onEvent` OnClick $ \_ _ -> do
         newTodo <- getProp (input ui) "value"
         updated <- onServer $ addTodo <.> newTodo
-        els     <- mapM createTodoEl updated
+        els     <- mapM createTodoEl $ reverse updated
         setChildren (todoList ui) els
