@@ -1,10 +1,15 @@
-{-# LANGUAGE ScopedTypeVariables #-}
-
 module Main where
+
+import Prelude hiding (div)
 import Haste
 import Haste.Perch
 
--- writeLog
-
 main :: IO ()
-main = withElem "root" $ build $ p "hello playerzzz"
+main = do
+  withElem "main" $ build $ do
+    div $ do
+      addEvent this OnClick $ \_ _ -> alert "sup players"
+      div $ do
+        p "hello"
+        p ! atr "style" "color:red" $   "world"
+  return ()
