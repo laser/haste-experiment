@@ -63,12 +63,6 @@ swapVal new el = do
 takeVal :: Elem -> Client String
 takeVal = swapVal ""
 
-hole1 :: a -> (b -> a)
-hole1 fx = \_ -> fx
-
-hole2 :: a -> (c -> b -> a)
-hole2 fx = \_ -> hole1 fx
-
 main :: IO ()
 main = do
   runApp (mkConfig "ws://localhost:24601" 24601) $ do
@@ -78,8 +72,8 @@ main = do
 
     -- make our todo-adding functions available to client
     -- as API calls
-    f1 <- remote (appendTodo todos)
-    f2 <- remote (todos >>= liftIO . C.readMVar)
+    f1 <- remote $ appendTodo todos
+    f2 <- remote $ todos >>= liftIO . C.readMVar
     let api = TodoAPI f1 f2
 
     -- TODO: how the heck does this work??
@@ -99,4 +93,4 @@ main = do
         _  -> return ()
 
       -- same thing, but for mouse
-      (saveButton ui) `onEvent` OnClick $ hole2 $ syncTodos ui $ apiAddTodo api
+      (saveButton ui) `onEvent` OnClick $ const . const $ syncTodos ui $ apiAddTodo api
