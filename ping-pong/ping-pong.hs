@@ -16,7 +16,7 @@ respond msg = liftIO $ do
 main :: IO ()
 main = do
   runApp (mkConfig "ws://localhost:24601" 24601) $ do
-    respond <- export respond
+    respond <- remote respond
 
     runClient $ withElems ["submit", "output"] $ \[button, textarea] -> do
       onEvent button OnClick $ \_ _ -> do
