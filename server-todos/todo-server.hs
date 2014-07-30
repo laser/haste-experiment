@@ -21,7 +21,9 @@ data TodoAPI = TodoAPI {
 }
 
 appendTodo :: Server (AppState) -> Todo -> Server TodoList
-appendTodo state todo = state >>= liftIO . flip atomicModifyIORef (\todos -> (todos, todos ++ [todo]))
+appendTodo sas todo = do
+  state <- sas
+  liftIO $ atomicModifyIORef state $ \todos -> (todos, todos ++ [todo])
 
 syncTodos :: TodoUI -> Remote (Todo -> Server TodoList) -> Client ()
 syncTodos ui addTodo = do
