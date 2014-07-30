@@ -1,13 +1,13 @@
 import Control.Applicative
 import Haste.App
-import qualified Control.Concurrent as C
+import Data.IORef
 
 type Todo     = String
 type TodoList = [Todo]
 
--- our application state consists of MVar containing
+-- our application state consists of IORef containing
 -- a list of Todo-values
-type AppState = C.MVar TodoList
+type AppState = IORef TodoList
 
 data TodoUI = TodoUI {
   todoList   :: Elem,
@@ -21,12 +21,7 @@ data TodoAPI = TodoAPI {
 }
 
 appendTodo :: Server (AppState) -> Todo -> Server TodoList
-appendTodo state todo = do
-  mv <- state
-  liftIO $ do
-    todos <- C.takeMVar mv
-    C.putMVar mv $ todos ++ [todo]
-    C.readMVar mv
+appendTodo state todo = state >>= liftIO . flip atomicModifyIORef (\todos -> (todos, todos ++ [todo]))
 
 syncTodos :: TodoUI -> Remote (Todo -> Server TodoList) -> Client ()
 syncTodos ui addTodo = do
@@ -68,12 +63,12 @@ main = do
   runApp (mkConfig "ws://localhost:24601" 24601) $ do
 
     -- initialize the list of todos on the server
-    todos <- liftServerIO $ C.newMVar ([] :: TodoList)
+    todos <- liftServerIO $ newIORef ([] :: TodoList)
 
     -- make our todo-adding functions available to client
     -- as API calls
     f1 <- remote $ appendTodo todos
-    f2 <- remote $ todos >>= liftIO . C.readMVar
+    f2 <- remote $ todos >>= liftIO . readIORef
     let api = TodoAPI f1 f2
 
     -- TODO: how the heck does this work??
