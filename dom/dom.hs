@@ -4,9 +4,9 @@ import Haste
 
 main = withElem "root" $ \root -> do
   marq <- newElem "marquee"
-  txt  <- newTextElem "Howdy!"
+  txt  <- newTextElem "Mark"
 
-  setAttr marq "id" "marq"
+  setAttr marq "id" "banner"
 
   addChild txt marq
   addChild marq root
