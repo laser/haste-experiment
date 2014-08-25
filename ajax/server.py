@@ -2,11 +2,12 @@
 
 from bottle import run, get, request, static_file
 from functools import wraps
-import sys
+import sys, datetime
 
 @get('/api')
 def api():
-  return { 'message' : 'Hello, Moto' }
+  time = unicode(datetime.datetime.now())
+  return 'ts: ' + time
 
 @get('/')
 def index():
