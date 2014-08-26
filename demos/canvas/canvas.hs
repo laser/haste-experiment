@@ -8,12 +8,12 @@ main = do
   animate canvas 0
 
 square = do
-  rect (-40, -40) (40, 40)
-  rect (-10, -10) (10, 10)
+  rect (-120, -120) (120, 120)
+  rect (-30, -30) (30, 30)
 
 animate canvas angle = do
   render canvas
-    $ translate (70, 70)
+    $ translate (190, 190)
     $ rotate angle
     $ stroke square
 
