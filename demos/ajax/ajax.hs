@@ -8,5 +8,5 @@ main = withElems ["btn", "out"]
     $ \_ _ -> textRequest GET "/api" []
       $ \res ->
         case res of
-          Just s  -> setProp out "innerHTML" s
-          Nothing -> setProp out "innerHTML" ""
+          Just s  -> setProp out "value" s
+          Nothing -> setProp out "value" ""
