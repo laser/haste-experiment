@@ -8,6 +8,15 @@ input[type=text] {
   font-family: monospace;
 }
 
+body.export input {
+  width: 30%;
+}
+
+body.export button {
+  display: block;
+  margin: 20px 0 0 0;
+}
+
 img#cat {
   position: absolute;
   top: 120px;
