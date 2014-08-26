@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript Consuming Haste</title>
+    <script src="export.js"></script>
+  </head>
+  <body>
+    <input type="text" id="x"> +
+    <input type="text" id="y"> = <span id="z"></span>
+    <button onclick="add(); return false;">add</button>
+    <script type="text/javascript">
+      function add() {
+        var z, d = document;
+
+        z = Haste.addInt(d.getElementById("x").value,
+            d.getElementById("y").value);
+
+        d.getElementById("z").innerHTML = z;
+      }
+    </script>
+  </body>
+</html>
