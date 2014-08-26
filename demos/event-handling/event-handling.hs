@@ -5,8 +5,8 @@ import Haste
 main = withElem "cat"
   $ \img -> do
     onEvent img OnMouseOver
-      $ const
-      $ setAttr img "border" "10"
+      $ \_ ->
+        setClass img "foo" True
 
     onEvent img OnMouseOut
-      $ setAttr img "border" "0"
+      $ setClass img "foo" False
