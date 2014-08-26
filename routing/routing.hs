@@ -2,16 +2,13 @@ module Main where
 
 import Haste
 
-setText el msg = do
-  let msg' = if null msg
-             then "hello"
-             else msg
+main = withElem "message" 
+  $ \el -> do
+    hash <- getHash
+    let msg = if null hash then "hello"
+              else hash
+    setProp el "innerHTML" msg
 
-  setProp el "innerHTML" msg'
-
-main = withElem "message" $ \el -> do
-  hash <- getHash
-  setText el hash
-
-  onHashChange $ \old new ->
-    setText el new
+    onHashChange 
+      $ \_ msg ->
+        setProp el "innerHTML" msg
