@@ -36,6 +36,10 @@ body.localstorage #ld {
   float: left;
 }
 
+body.routing #message {
+  display: block;
+}
+
 marquee {
     -webkit-animation: color-change 1s infinite;
     -moz-animation: color-change 1s infinite;
