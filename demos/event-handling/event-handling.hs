@@ -2,11 +2,15 @@ module Main where
 
 import Haste
 
-main = withElem "cat"
-  $ \img -> do
-    onEvent img OnMouseOver
-      $ \_ ->
-        setClass img "foo" True
+main = withElem "root" $ \root -> do
+  img <- newElem "img"
 
-    onEvent img OnMouseOut
-      $ setClass img "foo" False
+  setAttr img "src" "cat.jpg"
+  setAttr img "id" "cat"
+  addChild img root
+
+  onEvent img OnMouseOver $ \_ ->
+    setClass img "foo" True
+
+  onEvent img OnMouseOut
+    $ setClass img "foo" False
