@@ -2,7 +2,6 @@
 !*.*
 dist
 cabal-dev
-*.js
 *.o
 *.hi
 *.chi
