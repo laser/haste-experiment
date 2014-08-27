@@ -23,6 +23,19 @@ body.dom marquee {
   color: red;
 }
 
+body.localstorage #in {
+  float: left;
+}
+
+body.localstorage #sv {
+  clear: left;
+  float: left;
+}
+
+body.localstorage #ld {
+  float: left;
+}
+
 marquee {
     -webkit-animation: color-change 1s infinite;
     -moz-animation: color-change 1s infinite;
