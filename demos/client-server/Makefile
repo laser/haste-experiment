@@ -7,8 +7,6 @@ client-server:
 	ghc --make client-server.hs
 
 clean:
-	-rm -r main
-	-rm *~
 	-rm client-server.hi
 	-rm client-server.o
 
