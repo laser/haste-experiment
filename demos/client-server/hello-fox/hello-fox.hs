@@ -1,8 +1,7 @@
 import Haste.App
-import Data.IORef
 
 main :: IO ()
-main = runApp (mkConfig "ws://0.0.0.0:24601" 24601) clientMain
+main = runApp (mkConfig "ws://0.0.0.0:1111" 1111) clientMain
 
 echoServer :: String -> Server ()
 echoServer s = liftIO . putStrLn $ "The fox said: " ++ s
