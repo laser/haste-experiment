@@ -1,15 +1,15 @@
-all: client-server client-server.js
+all: hello-fox hello-fox.js
 
-client-server.js: client-server.hs
-	hastec client-server.hs
+hello-fox.js: hello-fox.hs
+	hastec hello-fox.hs
 
-client-server:
-	ghc --make client-server.hs
+hello-fox:
+	ghc --make hello-fox.hs
 
 clean:
-	-rm client-server.hi
-	-rm client-server.o
+	-rm hello-fox.hi
+	-rm hello-fox.o
 
 distclean: clean
-	-rm client-server
-	-rm client-server.js
+	-rm hello-fox
+	-rm hello-fox.js
